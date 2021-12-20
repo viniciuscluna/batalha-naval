@@ -2,14 +2,14 @@ package br.com.letscode.batalhanaval.utils;
 
 import java.util.Arrays;
 
-public class Tabuleiro {
+public class TabuleiroVazio {
 
-    private void getHeaderTabuleiro(String nomeJogador) {
+    private static void getHeaderTabuleiro(String nomeJogador) {
         System.out.println("-------------------------------------------------------");
         System.out.println("|                       "+nomeJogador+"                       |");
         System.out.println("-------------------------------------------------------");
     }
-    public void gerarTabuleiroVazio(String[][] tabuleiro, String nomeJogador){
+    public static void showTabuleiroVazio(String[][] tabuleiro, String nomeJogador){
         getHeaderTabuleiro(nomeJogador);
         for (String[] coluna : tabuleiro) {
             System.out.print("| ");
@@ -20,7 +20,7 @@ public class Tabuleiro {
         }
     }
 
-    public void preencherTabuleiroVazio(String[][] tabuleiro){
+    public static String[][] setTabuleiroVazio(String[][] tabuleiro){
         char[] headColuna = new char[] { ' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
 
         for (String[] row : tabuleiro)
@@ -34,6 +34,8 @@ public class Tabuleiro {
 
         for (int i = 1; i < 11; i++)
             tabuleiro[i][0] = Character.toString(headColuna[i]);
+
+        return  tabuleiro;
     }
 
 
