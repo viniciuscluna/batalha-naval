@@ -1,9 +1,9 @@
-package br.com.letscode.batalhanaval.Modelos;
+package br.com.letscode.batalhanaval.domain;
 
-public class BatalhaNaval {
+public class TabuleiroBatalhaNaval {
     private char[][] tabuleiroJogador = new char[10][10];
     private char[][] tabuleiroComputador = new char[10][10];
-    public BatalhaNaval(){
+    public TabuleiroBatalhaNaval(){
 
     }
 }

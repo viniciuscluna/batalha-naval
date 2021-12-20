@@ -1,8 +1,8 @@
-package br.com.letscode.batalhanaval;
+package br.com.letscode.batalhanaval.view;
 
 import java.util.Scanner;
 
-public class JogoBatalhaNaval {
+public class JogoBatalhaNavalView {
 
     public void Iniciar(Scanner scanner){
 
