@@ -40,6 +40,8 @@ public class TabuleiroJogo {
             textoConsiderar = "* ";
         else if(tabuleiroPrincipal == ESPACOS && tabuleiroSecundario == "* ")
             textoConsiderar = ESPACOS;
+        else if(tabuleiroPrincipal == "- " && tabuleiroSecundario == "- ")
+            textoConsiderar = "- ";
         else textoConsiderar = ESPACOS;
 
         return textoConsiderar;
