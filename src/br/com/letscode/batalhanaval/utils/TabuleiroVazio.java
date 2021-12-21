@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class TabuleiroVazio {
 
-    private static void getHeaderTabuleiro(String nomeJogador) {
+    public static void getHeaderTabuleiro(String nomeJogador) {
         System.out.println("-------------------------------------------------------");
         System.out.println("|                       "+nomeJogador+"                       |");
         System.out.println("-------------------------------------------------------");

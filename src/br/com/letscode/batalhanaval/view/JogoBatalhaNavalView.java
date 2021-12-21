@@ -9,31 +9,32 @@ public class JogoBatalhaNavalView {
     private BatalhaNavalController controller;
     private Scanner scanner;
 
-    public JogoBatalhaNavalView(Scanner scanner){
+    public JogoBatalhaNavalView(Scanner scanner) {
         this.scanner = scanner;
         this.controller = new BatalhaNavalController(askNomeJogador());
         escolherPosicoesSubmarino();
     }
 
-    private void escolherPosicoesSubmarino(){
+    private void escolherPosicoesSubmarino() {
         askPosicoesJogador();
         controller.posicionarNaviosComputador();
     }
 
-    private void askPosicoesJogador(){
+    private void askPosicoesJogador() {
         int submarinosRestantes = controller.getQuantidadeSubmarinos();
-
-        //while ()
-        ScreenUtil.printTextLine("Coloque a posição:!");
-        try {
-            controller.posicionarSubmarinoJogador(scanner.next());
-        }catch (Exception exception){
-
+        while (submarinosRestantes > 0) {
+            try {
+                ScreenUtil.printTextLine("Insira uma posição:");
+                controller.posicionarSubmarinoJogador(scanner.next());
+                submarinosRestantes--;
+            } catch (Exception exception) {
+                ScreenUtil.printTextLine("Posição já escolhida!");
+            }
         }
     }
 
-    private String askNomeJogador(){
-        ScreenUtil.printTextLine("Digite seu nome:!");
+    private String askNomeJogador() {
+        ScreenUtil.printTextLine("Digite seu nome:");
         return scanner.next();
     }
 }
