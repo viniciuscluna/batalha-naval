@@ -2,6 +2,9 @@ package br.com.letscode.batalhanaval.domain;
 
 import br.com.letscode.batalhanaval.utils.TabuleiroVazio;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class TabuleiroBatalhaNaval {
     public String[][] getTabuleiroJogador() {
         return tabuleiroJogador;
@@ -21,6 +24,11 @@ public class TabuleiroBatalhaNaval {
 
     private String[][] tabuleiroJogador = new String[11][11];
     private String[][] tabuleiroComputador = new String[11][11];
+
+    public String getNomeJogador() {
+        return nomeJogador;
+    }
+
     private String nomeJogador;
 
     public int getQuantidadeSubmarino() {
@@ -28,6 +36,21 @@ public class TabuleiroBatalhaNaval {
     }
 
     private final int QUANTIDADE_SUBMARINO = 10;
+    private long naviosRestantesJogador(){
+        return Arrays.stream(tabuleiroJogador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f -> f == "N ").count();
+    }
+    private long naviosRestantesComputador(){
+        return Arrays.stream(tabuleiroComputador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f ->f == "N ").count();
+    }
+    public boolean verificarSeVenceu(){
+       return (naviosRestantesComputador() == 0 || naviosRestantesJogador() == 0);
+    }
+    public String jogadorVenceu(){
+        if(naviosRestantesComputador() == 0)
+            return nomeJogador;
+        else return "Computador";
+    }
+
     public TabuleiroBatalhaNaval(String nomeJogador){
         this.tabuleiroJogador = TabuleiroVazio.setTabuleiroVazio(this.tabuleiroJogador);
         this.tabuleiroComputador = TabuleiroVazio.setTabuleiroVazio(this.tabuleiroComputador);
