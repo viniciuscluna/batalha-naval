@@ -1,5 +1,6 @@
 package br.com.letscode.batalhanaval.controller;
 
+import br.com.letscode.batalhanaval.consts.ValoresTabuleiro;
 import br.com.letscode.batalhanaval.domain.PosicaoTabuleiro;
 import br.com.letscode.batalhanaval.domain.TabuleiroBatalhaNaval;
 import br.com.letscode.batalhanaval.utils.StringHelper;
@@ -33,8 +34,8 @@ public class BatalhaNavalController {
         int lin = getRandomPosition();
         int col = getRandomPosition();
 
-        if (!Objects.equals(tabuleiroComputador[lin][col], "N ")) {
-            tabuleiroComputador[lin][col] = "N ";
+        if (!Objects.equals(tabuleiroComputador[lin][col], ValoresTabuleiro.Navio)) {
+            tabuleiroComputador[lin][col] = ValoresTabuleiro.Navio;
             tabuleiro.setTabuleiroComputador(tabuleiroComputador);
         } else {
             auxPosicionarNaviosComputador();
@@ -60,10 +61,10 @@ public class BatalhaNavalController {
         var posicao = StringHelper.converterTextoParaPosicao(texto);
         var tabuleiroJogador = tabuleiro.getTabuleiroJogador();
 
-        if (Objects.equals(tabuleiroJogador[posicao.getLinha()][posicao.getColuna()], "N "))
+        if (Objects.equals(tabuleiroJogador[posicao.getLinha()][posicao.getColuna()], ValoresTabuleiro.Navio))
             throw new Exception("Posição já preenchida!");
 
-        tabuleiroJogador[posicao.getLinha()][posicao.getColuna()] = "N ";
+        tabuleiroJogador[posicao.getLinha()][posicao.getColuna()] = ValoresTabuleiro.Navio;
         tabuleiro.setTabuleiroJogador(tabuleiroJogador);
     }
 
@@ -74,11 +75,11 @@ public class BatalhaNavalController {
     }
 
     private String getCondicaoBomba(String posicao) throws Exception {
-        if (posicao == "N ")
-            return "* ";
-        else if (posicao == "* ")
+        if (posicao == ValoresTabuleiro.Navio)
+            return ValoresTabuleiro.TiroCerteiro;
+        else if (posicao == ValoresTabuleiro.TiroCerteiro || posicao == ValoresTabuleiro.TiroAgua)
             throw new Exception("Posição já escolhida!");
-        else return "- ";
+        else return ValoresTabuleiro.TiroAgua;
     }
 
     public String getVencedor() {

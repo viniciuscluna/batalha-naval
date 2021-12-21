@@ -1,5 +1,7 @@
 package br.com.letscode.batalhanaval.utils;
 
+import br.com.letscode.batalhanaval.consts.ValoresTabuleiro;
+
 public class TabuleiroJogo {
 
     public static void showTabuleiroJogo(String[][] tabuleiroPrincipal, String[][] tabuleiroSecundario, String nome) {
@@ -25,24 +27,28 @@ public class TabuleiroJogo {
     }
 
     private static String getTextoNavio(String tabuleiroPrincipal, String tabuleiroSecundario) {
-         final String ESPACOS = "  ";
-        String textoConsiderar = ESPACOS;
 
-        if(tabuleiroPrincipal == ESPACOS && tabuleiroSecundario == "N ")
-            textoConsiderar = "N ";
-        else if(tabuleiroPrincipal == "- " && tabuleiroSecundario =="N ")
-            textoConsiderar = "n ";
-        else if(tabuleiroPrincipal == "* " && tabuleiroSecundario == "N ")
-            textoConsiderar = "X ";
-        else if(tabuleiroPrincipal == "- " && tabuleiroSecundario == ESPACOS)
-            textoConsiderar = "- ";
-        else if(tabuleiroPrincipal == "* " && tabuleiroSecundario == ESPACOS)
-            textoConsiderar = "* ";
-        else if(tabuleiroPrincipal == ESPACOS && tabuleiroSecundario == "* ")
-            textoConsiderar = ESPACOS;
-        else if(tabuleiroPrincipal == "- " && tabuleiroSecundario == "- ")
-            textoConsiderar = "- ";
-        else textoConsiderar = ESPACOS;
+        String textoConsiderar = ValoresTabuleiro.Vazio;
+
+        if(tabuleiroPrincipal == ValoresTabuleiro.Vazio && tabuleiroSecundario == ValoresTabuleiro.Navio)
+            textoConsiderar = ValoresTabuleiro.Navio;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.Navio && tabuleiroSecundario == ValoresTabuleiro.Navio)
+            textoConsiderar = ValoresTabuleiro.Navio;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.TiroAgua && tabuleiroSecundario == ValoresTabuleiro.Navio)
+            textoConsiderar = ValoresTabuleiro.TiroAguaNavioPosicionado;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.TiroCerteiro && tabuleiroSecundario == ValoresTabuleiro.Navio)
+            textoConsiderar = ValoresTabuleiro.TiroCerteiroNavioPosicionado;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.TiroAgua && tabuleiroSecundario == ValoresTabuleiro.Vazio)
+            textoConsiderar = ValoresTabuleiro.TiroAgua;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.TiroAgua && tabuleiroSecundario == ValoresTabuleiro.TiroAgua)
+            textoConsiderar = ValoresTabuleiro.TiroAgua;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.TiroCerteiro && tabuleiroSecundario == ValoresTabuleiro.Vazio)
+            textoConsiderar = ValoresTabuleiro.TiroCerteiro;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.TiroCerteiro && tabuleiroSecundario == ValoresTabuleiro.TiroAgua)
+            textoConsiderar = ValoresTabuleiro.TiroCerteiro;
+        else if(tabuleiroPrincipal == ValoresTabuleiro.Vazio && tabuleiroSecundario == ValoresTabuleiro.TiroCerteiro)
+            textoConsiderar = ValoresTabuleiro.Vazio;
+        else textoConsiderar = ValoresTabuleiro.Vazio;
 
         return textoConsiderar;
     }

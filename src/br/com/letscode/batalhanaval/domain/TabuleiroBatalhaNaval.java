@@ -1,5 +1,6 @@
 package br.com.letscode.batalhanaval.domain;
 
+import br.com.letscode.batalhanaval.consts.ValoresTabuleiro;
 import br.com.letscode.batalhanaval.utils.TabuleiroVazio;
 
 import java.util.Arrays;
@@ -37,10 +38,10 @@ public class TabuleiroBatalhaNaval {
 
     private final int QUANTIDADE_SUBMARINO = 10;
     private long naviosRestantesJogador(){
-        return Arrays.stream(tabuleiroJogador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f -> f == "N ").count();
+        return Arrays.stream(tabuleiroJogador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f -> f == ValoresTabuleiro.Navio).count();
     }
     private long naviosRestantesComputador(){
-        return Arrays.stream(tabuleiroComputador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f ->f == "N ").count();
+        return Arrays.stream(tabuleiroComputador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f ->f == ValoresTabuleiro.Navio).count();
     }
     public boolean verificarSeVenceu(){
        return (naviosRestantesComputador() == 0 || naviosRestantesJogador() == 0);
