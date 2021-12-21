@@ -4,6 +4,7 @@ import br.com.letscode.batalhanaval.domain.TabuleiroBatalhaNaval;
 import br.com.letscode.batalhanaval.utils.StringHelper;
 import br.com.letscode.batalhanaval.utils.TabuleiroVazio;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class BatalhaNavalController {
@@ -28,7 +29,7 @@ public class BatalhaNavalController {
         int lin = getRandomPosition();
         int col = getRandomPosition();
 
-        if(tabuleiroComputador[lin][col] != "N"){
+        if(!Objects.equals(tabuleiroComputador[lin][col], "N")){
             tabuleiroComputador[lin][col] = "N";
             tabuleiro.setTabuleiroComputador(tabuleiroComputador);
         }else{
@@ -43,7 +44,7 @@ public class BatalhaNavalController {
         var posicao = StringHelper.converterTextoParaPosicao(texto);
         var tabuleiroJogador = tabuleiro.getTabuleiroJogador();
 
-        if(tabuleiroJogador[posicao.getLinha()][posicao.getColuna()] == "N")
+        if(Objects.equals(tabuleiroJogador[posicao.getLinha()][posicao.getColuna()], "N"))
             throw new Exception("Posição já preenchida!");
 
         tabuleiroJogador[posicao.getLinha()][posicao.getColuna()] = "N";
