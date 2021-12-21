@@ -29,7 +29,7 @@ public class JogoBatalhaNavalView {
             try {
                 if(vezJogador) {
                     ScreenUtil.printTextLine("Posicione sua bomba: ");
-                    controller.posicionarBombaJogador(scanner.next());
+                    controller.posicionarBombaJogador(scanner.next().toUpperCase());
                     controller.showTabuleiroJogador();
                     vezJogador = false;
                 }
@@ -47,6 +47,8 @@ public class JogoBatalhaNavalView {
     }
 
     private void escolherPosicoesSubmarino() {
+        ScreenUtil.printTextLine("\nEsconda seus submarinos.:");
+        controller.showTabuleiroJogador();
         askPosicoesJogador();
         controller.posicionarNaviosComputador();
     }
@@ -55,8 +57,8 @@ public class JogoBatalhaNavalView {
         int submarinosRestantes = controller.getQuantidadeSubmarinos();
         while (submarinosRestantes > 0) {
             try {
-                ScreenUtil.printTextLine("Insira uma posição:");
-                controller.posicionarSubmarinoJogador(scanner.next());
+                ScreenUtil.printTextLine("Insira uma posição: Ex.:(A1, B2, C4...)");
+                controller.posicionarSubmarinoJogador(scanner.next().toUpperCase());
                 controller.showTabuleiroJogador();
                 submarinosRestantes--;
             } catch (Exception exception) {
