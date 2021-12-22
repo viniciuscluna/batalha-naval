@@ -10,6 +10,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         MenuView menuJogo = new MenuView(scanner);
-        menuJogo.Iniciar();
+        menuJogo.iniciar();
     }
 }

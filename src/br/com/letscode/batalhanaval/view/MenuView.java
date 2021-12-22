@@ -19,7 +19,7 @@ public class MenuView {
         ScreenUtil.printTextLine("#       #  #  ###  #  # ####   #### #  #   #     #   #### ####", 80, true, ' ');
 
     }
-    public void Iniciar() {
+    public void iniciar() {
         showHeader();
         showMenu();
     }
@@ -36,7 +36,7 @@ public class MenuView {
         option = scanner.next();
         switch (option.toUpperCase()) {
             case "I":
-                IniciarJogo();
+                iniciarJogo();
                 break;
             case "S":
                 System.out.print("\nAté logo!");
@@ -47,8 +47,9 @@ public class MenuView {
         }
     }
 
-    private void IniciarJogo(){
-        JogoBatalhaNavalView jogo = new JogoBatalhaNavalView(scanner);
-
+    private void iniciarJogo(){
+        ScreenUtil.printTextLine("\n# Bom Jogo!!! ", 80);
+        new JogoBatalhaNavalView(scanner);
+        iniciar();
     }
 }

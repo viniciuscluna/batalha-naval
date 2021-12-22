@@ -3,6 +3,7 @@ package br.com.letscode.batalhanaval.controller;
 import br.com.letscode.batalhanaval.consts.ValoresTabuleiro;
 import br.com.letscode.batalhanaval.domain.PosicaoTabuleiro;
 import br.com.letscode.batalhanaval.domain.TabuleiroBatalhaNaval;
+import br.com.letscode.batalhanaval.utils.Placar;
 import br.com.letscode.batalhanaval.utils.StringHelper;
 import br.com.letscode.batalhanaval.utils.TabuleiroJogo;
 import br.com.letscode.batalhanaval.utils.TabuleiroVazio;
@@ -46,7 +47,7 @@ public class BatalhaNavalController {
         return new Random().nextInt(10) + 1;
     }
 
-    public void posicionarBombaComputador() throws Exception {
+    public void posicionarBombaComputador() {
         var posicao = new PosicaoTabuleiro(getRandomPosition(), getRandomPosition());
         var tabuleiroOponente = tabuleiro.getTabuleiroJogador();
         try {
@@ -75,9 +76,9 @@ public class BatalhaNavalController {
     }
 
     private String getCondicaoBomba(String posicao) throws Exception {
-        if (posicao == ValoresTabuleiro.Navio)
+        if (posicao.equals(ValoresTabuleiro.Navio))
             return ValoresTabuleiro.TiroCerteiro;
-        else if (posicao == ValoresTabuleiro.TiroCerteiro || posicao == ValoresTabuleiro.TiroAgua)
+        else if (posicao.equals(ValoresTabuleiro.TiroCerteiro) || posicao.equals(ValoresTabuleiro.TiroAgua))
             throw new Exception("Posição já escolhida!");
         else return ValoresTabuleiro.TiroAgua;
     }
@@ -90,11 +91,15 @@ public class BatalhaNavalController {
         return tabuleiro.verificarSeVenceu();
     }
 
-    public void showTabuleiroJogador(){
+    public void showTabuleiroJogador(boolean mostrarPlacar){
         TabuleiroJogo.showTabuleiroJogo(this.tabuleiro.getTabuleiroComputador(), this.tabuleiro.getTabuleiroJogador(), this.tabuleiro.getNomeJogador());
+        if(mostrarPlacar){
+            Placar.showPlacar(this.tabuleiro.naviosRestantesComputador(), this.tabuleiro.naviosRestantesJogador(), this.tabuleiro.getNomeJogador());
+        }
     }
 
-    public void showTabuleiroComputador(){
+    public void showTabuleirosCompletos(){
+        showTabuleiroJogador(false);
         TabuleiroJogo.showTabuleiroJogo(this.tabuleiro.getTabuleiroJogador(), this.tabuleiro.getTabuleiroComputador(), "Computador");
     }
 

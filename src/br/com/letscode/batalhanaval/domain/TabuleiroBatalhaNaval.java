@@ -37,11 +37,11 @@ public class TabuleiroBatalhaNaval {
     }
 
     private final int QUANTIDADE_SUBMARINO = 10;
-    private long naviosRestantesJogador(){
-        return Arrays.stream(tabuleiroJogador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f -> f == ValoresTabuleiro.Navio).count();
+    public long naviosRestantesJogador(){
+        return Arrays.stream(tabuleiroJogador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f -> f.equals(ValoresTabuleiro.Navio)).count();
     }
-    private long naviosRestantesComputador(){
-        return Arrays.stream(tabuleiroComputador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f ->f == ValoresTabuleiro.Navio).count();
+    public long naviosRestantesComputador(){
+        return Arrays.stream(tabuleiroComputador).flatMap(Arrays::stream).collect(Collectors.toList()).stream().filter(f -> f.equals(ValoresTabuleiro.Navio)).count();
     }
     public boolean verificarSeVenceu(){
        return (naviosRestantesComputador() == 0 || naviosRestantesJogador() == 0);
@@ -53,8 +53,8 @@ public class TabuleiroBatalhaNaval {
     }
 
     public TabuleiroBatalhaNaval(String nomeJogador){
-        this.tabuleiroJogador = TabuleiroVazio.setTabuleiroVazio(this.tabuleiroJogador);
-        this.tabuleiroComputador = TabuleiroVazio.setTabuleiroVazio(this.tabuleiroComputador);
+        TabuleiroVazio.setTabuleiroVazio(this.tabuleiroJogador);
+        TabuleiroVazio.setTabuleiroVazio(this.tabuleiroComputador);
         this.nomeJogador = nomeJogador;
     }
 }

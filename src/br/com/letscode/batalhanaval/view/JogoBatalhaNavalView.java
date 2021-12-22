@@ -18,10 +18,9 @@ public class JogoBatalhaNavalView {
 
     private void comecarJogo(){
         boolean vezJogador = true;
+        controller.showTabuleiroJogador(true);
         executarRodada(vezJogador);
-
-        controller.showTabuleiroComputador();
-        controller.showTabuleiroJogador();
+        controller.showTabuleirosCompletos();
         ScreenUtil.printTextLine(controller.getVencedor() + " VENCEU!!!!");
     }
     private void executarRodada(boolean vezJogador){
@@ -29,8 +28,8 @@ public class JogoBatalhaNavalView {
             try {
                 if(vezJogador) {
                     ScreenUtil.printTextLine("Posicione sua bomba: ");
-                    controller.posicionarBombaJogador(scanner.next().toUpperCase());
-                    controller.showTabuleiroJogador();
+                    controller.posicionarBombaJogador(scanner.next());
+                    controller.showTabuleiroJogador(true);
                     vezJogador = false;
                 }
                 else{
@@ -47,8 +46,8 @@ public class JogoBatalhaNavalView {
     }
 
     private void escolherPosicoesSubmarino() {
-        ScreenUtil.printTextLine("\nEsconda seus submarinos.:");
-        controller.showTabuleiroJogador();
+        ScreenUtil.printTextLine("\nEscolha a posição seus submarinos.:");
+        controller.showTabuleiroJogador(false);
         askPosicoesJogador();
         controller.posicionarNaviosComputador();
     }
@@ -58,8 +57,8 @@ public class JogoBatalhaNavalView {
         while (submarinosRestantes > 0) {
             try {
                 ScreenUtil.printTextLine("Insira uma posição: Ex.:(A1, B2, C4...)");
-                controller.posicionarSubmarinoJogador(scanner.next().toUpperCase());
-                controller.showTabuleiroJogador();
+                controller.posicionarSubmarinoJogador(scanner.next());
+                controller.showTabuleiroJogador(false);
                 submarinosRestantes--;
             } catch (Exception exception) {
                 ScreenUtil.printTextLine(exception.getMessage());
