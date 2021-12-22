@@ -14,4 +14,8 @@ public class StringHelper {
             throw new Exception("Posição inválida");
         }
     }
+
+    public static String concatenaString(String mensagem){
+        return ("--------------------  " + mensagem + "  --------------------");
+    }
 }

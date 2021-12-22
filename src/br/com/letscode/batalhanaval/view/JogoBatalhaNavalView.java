@@ -28,8 +28,9 @@ public class JogoBatalhaNavalView {
             try {
                 if(vezJogador) {
                     ScreenUtil.printTextLine("Posicione sua bomba: ");
-                    controller.posicionarBombaJogador(scanner.next());
+                    var mensagem = controller.posicionarBombaJogador(scanner.next());
                     controller.showTabuleiroJogador(true);
+                    ScreenUtil.printTextLine(mensagem);
                     vezJogador = false;
                 }
                 else{

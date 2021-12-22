@@ -8,6 +8,5 @@ public class Placar {
         ScreenUtil.printTextLine("------------------ Navios restantes -------------------");
         ScreenUtil.printTextLine(nome+": "+naviosRestantesJogador);
         ScreenUtil.printTextLine("Computador: "+naviosRestantesComputador);
-        ScreenUtil.printTextLine("-------------------------------------------------------");
     }
 }

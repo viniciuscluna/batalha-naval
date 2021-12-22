@@ -2,11 +2,9 @@ package br.com.letscode.batalhanaval.controller;
 
 import br.com.letscode.batalhanaval.consts.ValoresTabuleiro;
 import br.com.letscode.batalhanaval.domain.PosicaoTabuleiro;
+import br.com.letscode.batalhanaval.domain.ResultadoBomba;
 import br.com.letscode.batalhanaval.domain.TabuleiroBatalhaNaval;
-import br.com.letscode.batalhanaval.utils.Placar;
-import br.com.letscode.batalhanaval.utils.StringHelper;
-import br.com.letscode.batalhanaval.utils.TabuleiroJogo;
-import br.com.letscode.batalhanaval.utils.TabuleiroVazio;
+import br.com.letscode.batalhanaval.utils.*;
 
 import java.util.Objects;
 import java.util.Random;
@@ -51,7 +49,7 @@ public class BatalhaNavalController {
         var posicao = new PosicaoTabuleiro(getRandomPosition(), getRandomPosition());
         var tabuleiroOponente = tabuleiro.getTabuleiroJogador();
         try {
-            tabuleiroOponente[posicao.getLinha()][posicao.getColuna()] = getCondicaoBomba(tabuleiroOponente[posicao.getLinha()][posicao.getColuna()]);
+            tabuleiroOponente[posicao.getLinha()][posicao.getColuna()] = getCondicaoBomba(tabuleiroOponente[posicao.getLinha()][posicao.getColuna()]).getResultado();
         } catch (Exception ex) {
             posicionarBombaComputador();
         }
@@ -69,18 +67,21 @@ public class BatalhaNavalController {
         tabuleiro.setTabuleiroJogador(tabuleiroJogador);
     }
 
-    public void posicionarBombaJogador(String texto) throws Exception {
+    public String posicionarBombaJogador(String texto) throws Exception {
         var posicao = StringHelper.converterTextoParaPosicao(texto);
         var tabuleiroOponente = tabuleiro.getTabuleiroComputador();
-        tabuleiroOponente[posicao.getLinha()][posicao.getColuna()] = getCondicaoBomba(tabuleiroOponente[posicao.getLinha()][posicao.getColuna()]);
+        var condicaoBomba= getCondicaoBomba(tabuleiroOponente[posicao.getLinha()][posicao.getColuna()]);
+        tabuleiroOponente[posicao.getLinha()][posicao.getColuna()] = condicaoBomba.getResultado();
+
+        return  StringHelper.concatenaString(condicaoBomba.getMensagem());
     }
 
-    private String getCondicaoBomba(String posicao) throws Exception {
+    private ResultadoBomba getCondicaoBomba(String posicao) throws Exception {
         if (posicao.equals(ValoresTabuleiro.Navio))
-            return ValoresTabuleiro.TiroCerteiro;
+            return new ResultadoBomba("Tiro Certeiro", ValoresTabuleiro.TiroCerteiro);
         else if (posicao.equals(ValoresTabuleiro.TiroCerteiro) || posicao.equals(ValoresTabuleiro.TiroAgua))
             throw new Exception("Posição já escolhida!");
-        else return ValoresTabuleiro.TiroAgua;
+        else return new ResultadoBomba("Tiro na água", ValoresTabuleiro.TiroAgua);
     }
 
     public String getVencedor() {
